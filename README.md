@@ -1,5 +1,6 @@
-```markdown
 # Cody
+
+(Under development...)
 
 Cody is an AI agent designed to assist developers by analyzing project requirements, suggesting solutions, and providing code changes for implementation.
 
@@ -57,4 +58,4 @@ npm start
 ## License
 
 This project is licensed under the MIT License.
-```
+
