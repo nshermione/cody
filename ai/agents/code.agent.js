@@ -20,6 +20,7 @@ export class CodeAgent {
       content: 'You are a Code AI expert who analyzes project requirements, suggests solutions, and provides code changes for implementation.',
     }
     this.conversationHistory = [];
+    await this.loadConversation();
   }
 
   async start() {
@@ -72,6 +73,7 @@ export class CodeAgent {
     }
 
     await this.checkSummary();
+    await this.saveConversation();
     this.userInput();
   }
 
@@ -227,5 +229,19 @@ export class CodeAgent {
           console.log('Unknown action');
       }
     }
+  }
+
+  async saveConversation() {
+    const conversation = JSON.stringify(this.conversationHistory);
+    fs.writeFileSync('conversation.json', conversation);
+  }
+
+  async loadConversation() {
+    const conversationExists = fs.existsSync('conversation.json');
+    if (!conversationExists) {
+      return;
+    }
+    const conversation = fs.readFileSync('conversation.json', 'utf8');
+    this.conversationHistory = JSON.parse(conversation);
   }
 }
